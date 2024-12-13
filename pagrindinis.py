@@ -1,6 +1,7 @@
 from biblioteka import Biblioteka
 from knygos import Knygos
 
+
 def pagrindinis():
     biblioteka= Biblioteka()
     
@@ -8,7 +9,7 @@ def pagrindinis():
     print("\n***************SVEIKI ATVYKE I VIRTUALIA BIBLIOTEKA*************** \n\n Pasirinkite koki veiksma noresite atlikti ")
     while True:
         
-        veiksmai= input("\n 1. Prideti knyga\n 2. Pasalinti knyga\n 3. Pasiimti knyga\n 4. Grazinti knyga\n 5. Perziureti esančias knygas bibliotekoje\n 6. Perziureti visas veluojancias knygas \n 7. Iseiti is bibliotekos\n")
+        veiksmai= input("\n 1. Prideti knyga\n 2. Pasalinti knyga\n 3. Pasiimti knyga\n 4. Grazinti knyga\n 5. Perziureti esančias knygas bibliotekoje\n 6. Perziureti visas veluojancias knygas \n 7. Ieskoti knygos \n 8. Iseiti is bibliotekos \n ")
 
         if  veiksmai == "1":
             pavadinimas= input(" Iveskite pavadinima: ")
@@ -61,13 +62,21 @@ def pagrindinis():
            print("Bibliotekoje esanciu knygu sarasas: ")
            biblioteka.perziureti_knygas()
 
-        # # elif veiksmai=="6":
-        # #    print("Veluojanciu grazinti knygu sarasas: ")
-
+        elif veiksmai=="6":
+            print("Bibliotekoje veluojanciu knygu sarasas: ")
+            biblioteka.perziureti_veluojancias()
         
-        # elif veiksmai=="7":
-        #    print("Aciu, jog lankotes musu bibliotekoje\nGeros dienos ")
-        #    break
+        elif veiksmai=="7":
+            ivestis= input("Iveskite, kokios knygos norite ieskoti (autorius/zanras/pavadinimas)")
+            ivestis2= input("iveskite duomenis ").strip()
+
+            print("Knyga pagal jusu paieska: ")
+            biblioteka.ieskoti_knygos(ivestis, ivestis2)
+            
+
+        elif veiksmai=="8":
+           print("Aciu, jog lankotes musu bibliotekoje\nGeros dienos ")
+           break
 
 pagrindinis()
 

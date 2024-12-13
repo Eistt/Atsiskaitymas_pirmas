@@ -1,10 +1,11 @@
 class Knygos:
-    def __init__(self, pavadinimas, autorius, leidimo_metai, zanras):
+    def __init__(self, pavadinimas, autorius, leidimo_metai, zanras, kiekis=1):
         self.pavadinimas = pavadinimas
         self.autorius = autorius
         self.leidimo_metai = leidimo_metai
         self.zanras = zanras
-        self.kiekis = 0
+        self.kiekis = kiekis
+        self.grazinimo_data= None
 
     def knygos_info(self):
         return {
