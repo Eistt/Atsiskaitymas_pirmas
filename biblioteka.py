@@ -16,13 +16,13 @@ class Biblioteka:
             print(f"Knyga prideta: {knyga.pavadinimas}")
             return
      self.knygos.append(knyga)
-     print(f"Knyga pridėta: {knyga.pavadinimas}")
+     print(f"Knyga prideta: {knyga.pavadinimas}")
      self.issaugoti_biblioteka()
         
 
     def pasalinti_knyga(self, pavadinimas):
         self.knygos = list(filter(lambda knyga: knyga.pavadinimas.lower() !=pavadinimas.lower(), self.knygos))
-        print(f"Knyga pašalinta: {pavadinimas}")
+        print(f"Knyga pasalinta: {pavadinimas}")
         self.issaugoti_biblioteka()
 
 
@@ -38,22 +38,21 @@ class Biblioteka:
 
     def grazinti_knyga(self, pavadinimas):
         for knyga in self.knygos:
-            if knyga.pavadinimas.lower() == pavadinimas.lower():
+            if knyga.pavadinimas == pavadinimas:
                 knyga.kiekis += 1
-                print("Visos knygos ir jų grąžinimo datos:")
-                for knyga in self.knygos:
-                    print(knyga.pavadinimas, knyga.grazinimo_data)
+                knyga.grazinimo_data = None  
+                print(f"Knyga '{pavadinimas}' grąžinta.")
                 return
-        print(f"Knyga '{pavadinimas}' nerasta bibliotekoje.")
+        print("Knyga nerasta.")
 
 
     def perziureti_knygas(self):
         if not self.knygos:
-            print("Biblioteka tuscia.")
+            print("Biblioteka tuscia")
         else:
             print("Knygu sarasas")
             for knyga in self.knygos:
-                print(f" {knyga.pavadinimas}, {knyga.autorius}, {knyga.leidimo_metai} {knyga.zanras}, {knyga.kiekis}")
+                print(f"Knyga: {knyga.pavadinimas}, {knyga.autorius}({knyga.leidimo_metai}),Zanras [{knyga.zanras}], {knyga.kiekis}vnt")
     
     def perziureti_veluojancias(self):
         dabar = datetime.now()
@@ -64,13 +63,10 @@ class Biblioteka:
         else:
             for knyga in veluojancios:
                 veluojamos_dienos = (dabar - knyga.grazinimo_data).days
-                print(f"{knyga.pavadinimas}, grąžinimo terminas buvo: {knyga.grazinimo_data.strftime('%Y-%m-%d')}, vėluojama: {veluojamos_dienos} dienas")
-
+                print(f"{knyga.pavadinimas}, grąžinimo terminas buvo buvo: {knyga.grazinimo_data.strftime('%Y-%m-%d')}, vėluojama: {veluojamos_dienos} dienas")")
     
     def ieskoti_knygos(self, vartotojo_ivestis, reiksme ):
-        
         rezultatai=self.knygos
-         
         if  vartotojo_ivestis== "pavadinimas":
             rezultatai = filter(lambda knyga: reiksme.lower() in knyga.pavadinimas.lower(), rezultatai)
         elif  vartotojo_ivestis== "autorius":
@@ -93,19 +89,6 @@ class Biblioteka:
         else:
             print("Nėra knygų pagal šiuos kriterijus.")
 
-
-
-    # def perziureti_veluojancias(self):
-    #     dabar= datetime.now()
-    #     veluojancios= filter(lambda knyga: knyga.grazinimo_data and knyga.grazinimo_data < dabar,self.knygos)
-    #     veluojancios= list(veluojancios)
-    #     if not veluojancios:
-    #         print("Nera veluojanciu knygu")
-    #     else:
-    #         for knyga in veluojancios:
-    #             veluojamos_dienos= (dabar-knyga.grazinimo_data).days
-    #             print(f"{knyga.pavadinimas}, grazinimo terminas buvo: {knyga.grazinimo_data.strftime('%Y-%m-%d')}, vėluojama: {veluojamos_dienos} dienas")
-        
                 
     def issaugoti_biblioteka(self):
         with open(self.failas, 'wb') as f:
@@ -116,35 +99,12 @@ class Biblioteka:
         try:
             with open(self.failas, 'rb') as f:
                 self.knygos = pickle.load(f)
-            # Patikrinkite kiekvieną knygą
             for knyga in self.knygos:
                 if not hasattr(knyga, 'grazinimo_data'):
-                    knyga.grazinimo_data = None
+                    knyga.kiekis=1
         except FileNotFoundError:
-            print("Nerasta anksčiau saugotų knygų. Biblioteka bus tuščia.")
-
-# def pateikti_knygas(self):
-#     with open(self.failas, 'rb') as f:
-#             pickle.load(self.knygos, f)
+            print("biblioteka tuscia")
 
 
-
-# biblioteka = Biblioteka()
-# knyga1 = Knygos("Harry Potter", "J.K. Rowling", 1997, "Fantasy", 3)
-# knyga2 = Knygos("The Hobbit", "J.R.R. Tolkien", 1937, "Fantasy", 2)
-
-# biblioteka.prideti_knyga(knyga1)
-# biblioteka.prideti_knyga(knyga2)
-
-# # Patikriname bibliotekoje esančias knygas
-# biblioteka.perziureti_knygas()
-
-# # Paimame knygą
-# biblioteka.paimti_knyga("Harry Potter")
-# biblioteka.perziureti_knygas()
-
-# # Grąžiname knygą
-# biblioteka.grazinti_knyga("Harry Potter")
-# biblioteka.perziureti_knygas()
 
 
