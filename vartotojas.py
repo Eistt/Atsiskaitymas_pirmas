@@ -42,11 +42,7 @@ class Vartotojas:
     def yra_veluojanti(self):
         if self.grazinimo_data and self.grazinimo_data < datetime.now():
             return True
-        # dabar = datetime.datetime.now()
-        # for knyga_info in self.paimtos_knygos:
-        #     if knyga_info["grazinimo_data"] < dabar:
-        #         return True
-        # return False
+    
     
     def paimti_knyga(self, knyga):
         self.paimtos_knygos.append(knyga)
@@ -65,14 +61,13 @@ class Vartotojas:
     def issaugoti_vartotojus(self, vartotoju_sarasas):
         with open('vartotojai.pkl', 'wb') as f:
             pickle.dump(vartotoju_sarasas, f)
-        print("Vartotojai išsaugoti sėkmingai.")
+     
 
     def nuskaityti_vartotojus(self):
         try:
             with open('vartotojai.pkl', 'rb') as f:
                 return pickle.load(f)
         except FileNotFoundError:
-            print("Failas nerastas, kuriamas naujas sąrašas.")
             return []
         
 

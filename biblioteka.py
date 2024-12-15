@@ -63,7 +63,7 @@ class Biblioteka:
         else:
             for knyga in veluojancios:
                 veluojamos_dienos = (dabar - knyga.grazinimo_data).days
-                print(f"{knyga.pavadinimas}, grąžinimo terminas buvo buvo: {knyga.grazinimo_data.strftime('%Y-%m-%d')}, vėluojama: {veluojamos_dienos} dienas")")
+            print(f"{knyga.pavadinimas}, grąžinimo terminas buvo buvo: {knyga.grazinimo_data.strftime('%Y-%m-%d')}, vėluojama: {veluojamos_dienos} dienas")
     
     def ieskoti_knygos(self, vartotojo_ivestis, reiksme ):
         rezultatai=self.knygos
