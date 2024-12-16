@@ -4,12 +4,14 @@ from vartotojas import Vartotojas
 
 biblioteka= Biblioteka()
 
+
 def pagrindinis():
     vartotoju_paieska = Vartotojas()
     vartotoju_sarasas = vartotoju_paieska.nuskaityti_vartotojus()
-
-    pasirinkimas = input("Pasirinkite, ką norite įvesti (1 - Varda ir pavarde, 2 - ID numeri): ").strip()
-    vartotoju_paieska = Vartotojas()
+    if True:
+      
+            pasirinkimas = input("Pasirinkite, ką norite įvesti (1 - Varda ir pavarde, 2 - ID numeri): ").strip()
+            vartotoju_paieska = Vartotojas()
     if pasirinkimas == "1":
         vardas = input("Įveskite vartotojo vardą: ").strip()
         pavarde = input("Įveskite vartotojo pavardę: ").strip()
@@ -18,8 +20,7 @@ def pagrindinis():
         id_numeris = input("Įveskite vartotojo ID numerį: ").strip()
         esamas_vartotojas = vartotoju_paieska.rasti_ieskoti_id(id_numeris, vartotoju_sarasas)
     else:
-        print("Neteisingas pasirinkimas Bandykite dar kartą.")
-        return
+        print("Neteisingas pasirinkimas")
     if esamas_vartotojas:
         print(f"Sveiki sugrįžę {esamas_vartotojas}")
     elif not esamas_vartotojas:
@@ -34,8 +35,8 @@ def pagrindinis():
         veiksmai = input("\n 1. Pridėti knygą\n 2. Pašalinti knygą\n 3. Pasiimti knygą\n 4. Grąžinti knygą\n 5. Peržiūrėti esančias knygas bibliotekoje\n 6. Peržiūrėti visas vėluojančias knygas\n 7. Ieškoti knygos\n 8. Išeiti iš bibliotekos\n ")
 
         if veiksmai == "1":
-            pavadinimas = input("Iveskite pavadinima: ")
-            autorius = input("Iveskite autoriu: ")
+            pavadinimas = input("Iveskite pavadinima: ").strip()
+            autorius = input("Iveskite autoriu: ").strip()
             while True:
                 try:
                     leidimo_metai = int(input("Įveskite leidimo metus tarp 1800-2024: "))
@@ -85,7 +86,7 @@ def pagrindinis():
                       print("Jus neturite ko grazinti")
                       continue
                   if esamas_vartotojas:
-                      sugrazinti_knyga = input("Įveskite knygos pavadinimą, kurią norite grąžinti: ")
+                      sugrazinti_knyga = input("Įveskite knygos pavadinimą, kurią norite grazinti: ")
                       for knyga in esamas_vartotojas.paimti_knyga:
                           if knyga.pavadinimas.lower() == sugrazinti_knyga.lower():
                               esamas_vartotojas.grazinti_knyga(knyga)

@@ -2,14 +2,14 @@ from datetime import datetime
 
 
 class Knygos:
-    def __init__(self, pavadinimas, autorius, leidimo_metai, zanras, kiekis=1, terminas=None ):
+    def __init__(self, pavadinimas, autorius, leidimo_metai, zanras, kiekis=1,grazinimo_data=None, terminas=None ):
         self.pavadinimas = pavadinimas
         self.autorius = autorius
         self.leidimo_metai = leidimo_metai
         self.zanras = zanras
         self.kiekis = kiekis
         self.terminas = terminas  
-        self.grazinimo_data = None  
+        self.grazinimo_data = grazinimo_data
     def knygos_info(self):
         return {
             "pavadinimas": self.pavadinimas,
@@ -22,7 +22,7 @@ class Knygos:
     def yra_veluojanti(self):
         if self.grazinimo_data is not None and self.grazinimo_data < datetime.now():
             return True
-        return False
+        
 
     def __str__(self):
         return f"{self.pavadinimas} ({self.leidimo_metai}) autorius {self.autorius}"
